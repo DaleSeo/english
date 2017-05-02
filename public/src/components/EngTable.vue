@@ -3,16 +3,16 @@
     <b-table hover
       :items="items"
       :fields="fields"
-      :current-page="currentPage"
-      :per-page="perPage"
       :filter="filter">
-      <template slot="name" scope="item">
-        {{item.value.first}} {{item.value.last}}
-      </template>
-      <template slot="actions" scope="item">
-        <b-btn size="sm" @click="details(item.item)">Details</b-btn>
-      </template>
     </b-table>
+
+    <div class="justify-content-center row my-1">
+      <b-pagination size="md" :total-rows="tatalRows" :per-page="perPage" v-model="currentPage" />
+    </div>
+
+    <pre>
+      {{items}}
+    </pre>
   </div>
 </template>
 
@@ -20,128 +20,46 @@
 export default {
   data () {
     return {
+      items: [],
+      tatalRows: 10,
       currentPage: 1,
-      perPage: 5,
+      perPage: 10,
       filter: null,
       fields: {
-        name: {
-          label: 'Person Full name',
+        _id: {
+          label: 'ID',
           sortable: true
         },
-        age: {
-          label: 'Person age',
+        title: {
+          label: 'Title',
           sortable: true
         },
-        isActive: {
-          label: 'is Active'
-        },
-        actions: {
-          label: 'Actions'
+        date: {
+          label: 'Date'
         }
-      },
-      items: [{
-        isActive: true,
-        age: 40,
-        name: {
-          first: 'Dickerson',
-          last: 'Macdonald'
-        }
-
-      }, {
-        isActive: false,
-        age: 21,
-        name: {
-          first: 'Larsen',
-          last: 'Shaw'
-        }
-
-      }, {
-        isActive: false,
-        age: 9,
-        state: 'success',
-        name: {
-          first: 'Mitzi',
-          last: 'Navarro'
-        }
-
-      }, {
-        isActive: false,
-        age: 89,
-        name: {
-          first: 'Geneva',
-          last: 'Wilson'
-        }
-
-      }, {
-        isActive: true,
-        age: 38,
-        name: {
-          first: 'Jami',
-          last: 'Carney'
-        }
-
-      }, {
-        isActive: false,
-        age: 27,
-        name: {
-          first: 'Essie',
-          last: 'Dunlap'
-        }
-
-      }, {
-        isActive: true,
-        age: 40,
-        name: {
-          first: 'Dickerson',
-          last: 'Macdonald'
-        }
-
-      }, {
-        isActive: false,
-        age: 21,
-        name: {
-          first: 'Larsen',
-          last: 'Shaw'
-        }
-
-      }, {
-        isActive: false,
-        age: 26,
-        name: {
-          first: 'Mitzi',
-          last: 'Navarro'
-        }
-
-      }, {
-        isActive: false,
-        age: 22,
-        name: {
-          first: 'Geneva',
-          last: 'Wilson'
-        }
-
-      }, {
-        isActive: true,
-        age: 38,
-        name: {
-          first: 'Jami',
-          last: 'Carney'
-        }
-
-      }, {
-        isActive: false,
-        age: 27,
-        name: {
-          first: 'Essie',
-          last: 'Dunlap'
-        }
-      }]
+      }
     }
   },
   methods: {
-    details(item) {
+    details (item) {
       alert(JSON.stringify(item));
+    },
+    findPosts () {
+      console.log('EngTable#findPosts()')
+      this.$http.get(`/posts?page=${this.currentPage}`)
+        .then(res => {
+          this.tatalRows = res.data.total
+          this.items = res.data.items
+        })
     }
+  },
+  watch: {
+    currentPage (newPage) {
+      this.findPosts()
+    }
+  },
+  created () {
+    this.findPosts()
   }
 }
 </script>
