@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    {{post}}
+    <h3><strong>English Details</strong></h3>
+    <hr/>
 
     <div class="text-right mb-2">
         <b-button size="sm" variant="primary" :disabled="disabled" @click="list">
@@ -14,8 +15,12 @@
         </b-button>
     </div>
 
+    <div class="text-center">
+      <i class="fa fa-spinner fa-spin fa-3x fa-fw" v-show="loading"/>
+    </div>
+
     <b-card
-      v-show="post"
+      v-show="!loading && post"
       :header="post.title"
       show-footer
     >
@@ -44,7 +49,7 @@ export default {
       this.$emit('list')
     },
     edit () {
-      this.$emit('edit')
+      this.$emit('edit', this.id)
     },
     del () {
       console.log('EngDetail.vue#del()')

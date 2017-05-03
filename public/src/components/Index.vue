@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{id}}
     <EngList v-if="mode === 'L'"
       @view="view" @edit="edit"
     />

@@ -1,6 +1,9 @@
 <template>
   <div class="container">
 
+    <h3><strong>English List</strong></h3>
+    <hr/>
+
     <div class="text-right mb-2">
         <b-button variant="primary" @click="edit">
           <i class="fa fa-pencil-square-o"/> Write
