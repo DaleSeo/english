@@ -1,4 +1,5 @@
 const MongoClient = require('mongodb').MongoClient
+const ObjectID = require('mongodb').ObjectID
 const config = require('../config')
 
 exports.find = function (options) {
@@ -16,4 +17,12 @@ exports.find = function (options) {
     .then(values => {
       return {total: values[0], items: values[1]}
     })
+}
+
+exports.findOne = function (id) {
+  return MongoClient.connect(config.mongodbUri)
+    .then(db =>
+      db.collection('posts')
+        .findOne({_id: new ObjectID(id)})
+    )
 }
