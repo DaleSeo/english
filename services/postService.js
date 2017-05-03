@@ -26,3 +26,37 @@ exports.findOne = function (id) {
         .findOne({_id: new ObjectID(id)})
     )
 }
+
+exports.create = function (doc) {
+  Object.assign(doc, {
+    hit: 0,
+    date: new Date()
+  })
+  return MongoClient.connect(config.mongodbUri)
+    .then(db =>
+      db.collection('posts')
+        .insertOne(doc)
+    )
+    .then(res => res.ops[0]._id)
+}
+
+exports.modify = function (id, doc) {
+  return MongoClient.connect(config.mongodbUri)
+    .then(db =>
+      db.collection('posts')
+        .updateOne({_id: new ObjectID(id)}, {
+          $set: {
+            title: doc.title,
+            memo: doc.memo
+          }
+        })
+    )
+}
+
+exports.remove = function (id, doc) {
+  return MongoClient.connect(config.mongodbUri)
+    .then(db =>
+      db.collection('posts')
+        .deleteOne({_id: new ObjectID(id)})
+    )
+}

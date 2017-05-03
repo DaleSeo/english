@@ -1,16 +1,22 @@
 <template>
   <div class="container">
 
+    <div class="text-right mb-2">
+        <b-button variant="primary" @click="edit">
+          <i class="fa fa-pencil-square-o"/> Write
+        </b-button>
+    </div>
+
     <div>
       <b-table hover
         :items="items"
         :fields="fields"
         :filter="filter"
-        @row-clicked="detail"
+        @row-clicked="view"
       />
 
       <div class="justify-content-center row my-1">
-        <icon name="spinner" scale="3" spin v-show="loading"/>
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw" v-show="loading"/>
         <b-pagination size="md" :total-rows="tatalRows" :per-page="perPage" v-model="currentPage" v-show="!loading"/>
       </div>
     </div>
@@ -49,8 +55,11 @@ export default {
     }
   },
   methods: {
-    detail (item, index) {
-      this.$emit('detail', item._id)
+    view (item, index) {
+      this.$emit('view', item._id)
+    },
+    edit () {
+      this.$emit('edit')
     },
     findPosts () {
       console.log('EngTable#findPosts()')

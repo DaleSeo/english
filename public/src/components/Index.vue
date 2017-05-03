@@ -1,28 +1,33 @@
 <template>
   <div>
-    <EngTable
-      v-if="mode === 'L'"
-      @detail="detail"
+    {{id}}
+    <EngList v-if="mode === 'L'"
+      @view="view" @edit="edit"
     />
-    <EngDetails
-      v-if="mode === 'D'"
-      :id="id"
-      @list="list"
-      @edit="edit"
+    <EngView
+      v-if="mode === 'D'" :id="id"
+      @list="list" @edit="edit"
+    />
+    <EngEdit
+      v-if="mode === 'E'" :id="id"
+      @list="list" @view="view"
     />
   </div>
 </template>
 
 <script>
-import EngTable from './EngTable.vue'
-import EngDetails from './EngDetails.vue'
+import EngList from './EngList.vue'
+import EngView from './EngView.vue'
+import EngEdit from './EngEdit.vue'
+
+import toastr from 'toastr'
 
 export default {
-  components: {EngTable, EngDetails},
+  components: {EngList, EngView, EngEdit},
   data () {
     return {
-      mode: 'D',
-      id: '5907309a652be80cc8b64fb6'
+      mode: 'L',
+      id: null
     }
   },
   methods: {
@@ -30,13 +35,14 @@ export default {
       console.log('Index.vue#list()')
       this.mode = 'L'
     },
-    detail (id) {
-      console.log('Index.vue#detail()', id)
-      this.mode = 'D'
+    view (id) {
+      console.log('Index.vue#view()', id)
       this.id = id
+      this.mode = 'D'
     },
-    edit () {
+    edit (id) {
       console.log('Index.vue#edit()')
+      this.id = id
       this.mode = 'E'
     }
   }
