@@ -50,7 +50,7 @@ export default {
           label: 'Title',
           sortable: true
         },
-        date: {
+        createdDate: {
           label: 'Date',
           sortable: true
         }

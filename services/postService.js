@@ -28,9 +28,11 @@ exports.findOne = function (id) {
 }
 
 exports.create = function (doc) {
+  let date = new Date()
   Object.assign(doc, {
     hit: 0,
-    date: new Date()
+    createdDate: date,
+    lastModifiedDate: date
   })
   return MongoClient.connect(config.mongodbUri)
     .then(db =>
@@ -47,7 +49,8 @@ exports.modify = function (id, doc) {
         .updateOne({_id: new ObjectID(id)}, {
           $set: {
             title: doc.title,
-            memo: doc.memo
+            memo: doc.memo,
+            lastModifiedDate: new Date()
           }
         })
     )

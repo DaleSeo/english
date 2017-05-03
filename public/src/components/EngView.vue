@@ -25,7 +25,7 @@
       show-footer
     >
     <div slot="footer" class="text-muted text-right">
-      <small>{{post.date}}</small>
+      <small>last modified on {{post.lastModifiedDate}} created on {{post.createdDate}}</small>
     </div>
       {{post.memo}}
     </b-card>
