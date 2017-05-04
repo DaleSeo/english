@@ -2,7 +2,7 @@ const router = require('express').Router()
 const postSvc = require('../services/postService')
 
 router.get('', (req, res) => {
-  postSvc.find({page: req.query.page || 1})
+  postSvc.find(req.query.page || 1, req.query.query)
     .then(docs => res.send(docs))
 })
 

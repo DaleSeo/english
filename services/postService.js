@@ -1,15 +1,17 @@
 const MongoClient = require('mongodb').MongoClient
 const ObjectID = require('mongodb').ObjectID
+const queryUtils = require('./queryUtils')
 const config = require('../config')
 
-exports.find = function (options) {
+exports.find = function (page, query) {
+  query = queryUtils.buildQuery(query)
   return MongoClient.connect(config.mongodbUri)
     .then(db => [
-      db.collection('posts').find()
+      db.collection('posts').find(query)
         .count(),
-      db.collection('posts').find()
+      db.collection('posts').find(query)
         .sort({_id: -1})
-        .skip((options.page - 1) * 10)
+        .skip((page - 1) * 10)
         .limit(10)
         .toArray()
     ])

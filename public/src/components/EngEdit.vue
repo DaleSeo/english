@@ -11,20 +11,23 @@
     </div>
 
     <div v-show="!loading && post">
-      <div class="form-group" >
-        <label class="form-control-label">Title</label>
+      <b-form-fieldset
+        label="Title"
+        :state="post.title.length?'success':'warning'"
+      >
         <b-form-input type="text"
           v-model="post.title"
           :state="post.title.length?'success':'warning'"
         />
-      </div>
-      <div class="form-group">
-        <label class="form-control-label">Content</label>
+      </b-form-fieldset>
+      <b-form-fieldset
+        label="Content"
+      >
         <b-form-input textarea
           v-model="post.memo"
           :rows="10"
         />
-      </div>
+      </b-form-fieldset>
       <div class="text-right">
         <b-button size="md" variant="primary" :disabled="disabled" @click="save">
           <i class="fa fa-save"/> Save
