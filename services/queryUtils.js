@@ -18,5 +18,5 @@ exports.buildRegex = function (text) {
 
   let words = text.trim().split(' ')
   let regex = words.join('.*')
-  return new RegExp('.*' + regex + '.*')
+  return new RegExp('.*' + regex + '.*', 'i')
 }

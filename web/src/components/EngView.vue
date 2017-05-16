@@ -24,10 +24,10 @@
       :header="post.title"
       show-footer
     >
-    <div slot="footer" class="text-muted text-right">
-      <small>last modified on {{post.lastModifiedDate}} created on {{post.createdDate}}</small>
-    </div>
-      {{post.memo}}
+      <pre>{{post.memo}}</pre>
+      <div slot="footer" class="text-muted text-right">
+        <small>last modified on {{post.lastModifiedDate}} created on {{post.createdDate}}</small>
+      </div>
     </b-card>
   </div>
 </template>

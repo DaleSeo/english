@@ -12,7 +12,7 @@
       <div class="row mb-2">
         <div class="col-md-3 offset-md-8">
           <b-input-group>
-            <b-form-input type="search" v-model="query"/>
+            <b-form-input type="search" v-model="query" @keyup.enter="search"/>
             <b-input-group-button slot="right">
               <b-button variant="secondary" @click="search">
                 <i class="fa fa-search"/>
