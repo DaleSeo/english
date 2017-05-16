@@ -1,0 +1,9 @@
+language: node_js
+node_js: '7'
+deploy:
+  provider: heroku
+  api_key:
+    secure: r6XYMjHR9OpJQuXpZlk4hN4L0IpuemFc/F1N/hf5q+vUx2pdqyy10fMhPdGFedoZ1FX/Zu10/7UN5pOAhbA13gRbJlhMhhX4YOS5B9aRx4ot0vVYifszu5MNMoYNazBwwiZNawyt70TX6eWBpmCrpS8MWIG02q/odaI4npWiHoyW7+1B9HCsmk4DSP/9ohYPofPOtn7apSRNVBX+Gsao1vThRe2kTuaKHgYXcdYCAeZtvwWMAxNyRSx185wnC3G/hqIrv/ZitEsila4YA49hykIN4KBOk4xjRoK3IOKu5kgHg+hkU9lMHhZGGi4KKUml1rK9lzX5C0g0c3K4THbQpW9dc35caAXEhqCSCYU0bkI6p78pkO8Sd3DrXsONQ0EfJQ/6v5KBNvsRAflcnbuvxdqEGhAEs1PwHhZIm5FNRz9Za1/nYkFtnJM6nGzYlme3TJ1elJ7gV5IyqGy32vb5RhgVOwRenREBZkjMlkmOrtaGSFkuAqg0tgm8I/FTRubfVdNCVo7iFPiK+46yEZjmPop0UoJymf2REmn+6bvAbNrvhOVlpOmHyZXAB5hi46z0w1zLjoOyVKSby3jJDqWjl+4wbxHNZWvTGO45e7lspMQmOkrSb4d/hTJXUleFTpPPWGEqyLfYo3O6v4viAiKBYFfT81A4fGabtEzgMzpkQ0A=
+  app: dale-english
+  on:
+    repo: DaleSeo/english
